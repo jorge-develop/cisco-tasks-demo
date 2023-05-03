@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import CiscoItem from "./CiscoItem";
 import { toast } from "react-toastify";
 
 const confirmStyleBox = {
@@ -52,57 +53,27 @@ function Ciscolist({ todos, setTodos, setEditTitle, editTitle }) {
 
   const renderCiscolist = todos.map(todo =>
     isEdit === todo.id ? (
-      <li
-        className={`list-item${isHidden === todo.id ? " hidden" : ""}`}
+      <CiscoItem
         key={todo.id}
-      >
-        <input
-          type="text"
-          value={todo.title}
-          className="list edit"
-          onChange={e => handleChangeEdit(e, todo)}
-        />
-        <div>
-          <button
-            className="button-edit task-button"
-            onClick={() => handleEdit(null)}
-          >
-            <i className="fa fa-check-square-o"></i>
-          </button>
-        </div>
-      </li>
+        todo={todo}
+        isHidden={isHidden}
+        handleChangeEdit={handleChangeEdit}
+        handleEdit={handleEdit}
+        handleDelete={handleDelete}
+        handleComplete={handleComplete}
+        edit={true}
+      />
     ) : (
-      <li
-        className={`list-item${isHidden === todo.id ? " hidden" : ""}`}
+      <CiscoItem
         key={todo.id}
-      >
-        <input
-          type="text"
-          value={todo.title}
-          className={`list ${todo.completed ? "complete" : null}`}
-          onChange={e => e.preventDefault()}
-        />
-        <div>
-          <button
-            className="button-complete task-button"
-            onClick={() => handleComplete(todo.id)}
-          >
-            <i className="fa fa-check-circle"></i>
-          </button>
-          <button
-            className="button-edit task-button"
-            onClick={() => handleEdit(todo.id)}
-          >
-            <i className="fa fa-edit"></i>
-          </button>
-          <button
-            className="button-delete task-button"
-            onClick={() => handleDelete(todo.id, todo.title)}
-          >
-            <i className="fa fa-trash"></i>
-          </button>
-        </div>
-      </li>
+        todo={todo}
+        isHidden={isHidden}
+        handleChangeEdit={handleChangeEdit}
+        handleEdit={handleEdit}
+        handleDelete={handleDelete}
+        handleComplete={handleComplete}
+        edit={false}
+      />
     )
   );
 
