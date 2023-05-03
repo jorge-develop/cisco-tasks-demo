@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
+import { GlobalContext } from "../context/GlobalContext";
 
-function Header({ todos, editTitle }) {
+function Header({ editTitle }) {
+  const {
+    state: { list },
+  } = useContext(GlobalContext);
   return (
     <div className="header">
-      <h1 style={{ color: editTitle ? "red" : !todos.length ? "red" : null }}>
+      <h1 style={{ color: editTitle ? "red" : !list.length ? "red" : null }}>
         {editTitle
           ? " EDIT MODE"
-          : `${!todos.length ? "NO TASKS!" : `CiscoTask-${todos.length}`}`}
+          : `${!list.length ? "NO TASKS!" : `CiscoTask-${list.length}`}`}
       </h1>
     </div>
   );

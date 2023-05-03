@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import CiscoItem from "./CiscoItem";
+import { GlobalContext } from "../context/GlobalContext";
 import { toast } from "react-toastify";
 
 const confirmStyleBox = {
@@ -10,6 +11,9 @@ const confirmStyleBox = {
 function Ciscolist({ todos, setTodos, setEditTitle, editTitle }) {
   const [isHidden, setIsHidden] = useState(null);
   const [isEdit, setIsEdit] = useState(null);
+  const {
+    state: { list },
+  } = useContext(GlobalContext);
 
   const handleDelete = (_id, _title) => {
     const confirmDelete = window.confirm(
@@ -51,7 +55,7 @@ function Ciscolist({ todos, setTodos, setEditTitle, editTitle }) {
     setTodos(mapValue);
   };
 
-  const renderCiscolist = todos.map(todo =>
+  const renderCiscolist = list.map(todo =>
     isEdit === todo.id ? (
       <CiscoItem
         key={todo.id}
