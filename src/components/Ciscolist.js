@@ -1,6 +1,12 @@
 import React, { useState, useContext } from "react";
 import CiscoItem from "./CiscoItem";
 import { GlobalContext } from "../context/GlobalContext";
+import {
+  deleteItem,
+  updateItem,
+  editItem,
+  editTitleOn,
+} from "../context/Actions";
 import { toast } from "react-toastify";
 
 const confirmStyleBox = {
@@ -8,9 +14,10 @@ const confirmStyleBox = {
   autoClose: 8000,
 };
 
-function Ciscolist({ todos, setTodos, setEditTitle, editTitle }) {
+function Ciscolist() {
   const [isHidden, setIsHidden] = useState(null);
   const [isEdit, setIsEdit] = useState(null);
+  const { dispatch } = useContext(GlobalContext);
   const {
     state: { list },
   } = useContext(GlobalContext);
@@ -25,34 +32,25 @@ function Ciscolist({ todos, setTodos, setEditTitle, editTitle }) {
       toast.success(`"${_title}" has been deleted!`, confirmStyleBox);
       // Pause for 1 second before deleting the item and showing a success message so css animation can take effect
       setTimeout(() => {
-        const filterVal = todos.filter(obj => obj.id !== _id);
-        setTodos(filterVal);
+        deleteItem(_id, dispatch);
       }, 1000);
     } else {
       toast.warning(`"${_title}" was not deleted.`, confirmStyleBox);
     }
   };
 
-  const handleComplete = id => {
-    const mapValue = todos.map(todoObj =>
-      todoObj.id === id
-        ? { ...todoObj, completed: !todoObj.completed }
-        : todoObj
-    );
-
-    setTodos(mapValue);
+  const handleComplete = _id => {
+    updateItem(_id, dispatch);
   };
 
-  const handleEdit = id => {
+  const handleEdit = (id, val) => {
     setIsEdit(id);
-    setEditTitle(Boolean(id));
+
+    editTitleOn(Boolean(id), dispatch);
   };
 
   const handleChangeEdit = (e, ciscoObject) => {
-    const mapValue = todos.map(obj =>
-      obj.id === ciscoObject.id ? { ...obj, title: e.target.value } : obj
-    );
-    setTodos(mapValue);
+    editItem(e, ciscoObject.id, dispatch);
   };
 
   const renderCiscolist = list.map(todo =>

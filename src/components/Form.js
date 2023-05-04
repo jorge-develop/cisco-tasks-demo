@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 import { addItem } from "../context/Actions.js";
 import { toast } from "react-toastify";
@@ -7,7 +7,8 @@ const confirmStyleBox = {
   autoClose: 8000,
 };
 
-function Form({ input, todos, setInput, setTodos }) {
+function Form() {
+  const [input, setInput] = useState("");
   const { dispatch } = useContext(GlobalContext);
   const handleChange = e => {
     setInput(e.target.value);
@@ -27,7 +28,6 @@ function Form({ input, todos, setInput, setTodos }) {
       completed: false,
     };
 
-    // setTodos([newTask, ...todos]);
     addItem(newTask, dispatch);
   };
 
