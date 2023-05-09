@@ -6,7 +6,7 @@ const confirmStyleBox = {
   autoClose: 8000,
 };
 
-function Ciscolist({ todos, setTodos, setEditTitle, editTitle }) {
+function Ciscolist({ todos, setTodos, setEditTitle }) {
   const [isHidden, setIsHidden] = useState(null);
   const [isEdit, setIsEdit] = useState(null);
 
