@@ -53,31 +53,18 @@ function Ciscolist() {
     editItem(e, ciscoObject.id, dispatch);
   };
 
-  const renderCiscolist = list.map(todo =>
-    isEdit === todo.id ? (
-      <CiscoItem
-        key={todo.id}
-        todo={todo}
-        isHidden={isHidden}
-        handleChangeEdit={handleChangeEdit}
-        handleEdit={handleEdit}
-        handleDelete={handleDelete}
-        handleComplete={handleComplete}
-        edit={true}
-      />
-    ) : (
-      <CiscoItem
-        key={todo.id}
-        todo={todo}
-        isHidden={isHidden}
-        handleChangeEdit={handleChangeEdit}
-        handleEdit={handleEdit}
-        handleDelete={handleDelete}
-        handleComplete={handleComplete}
-        edit={false}
-      />
-    )
-  );
+  const renderCiscolist = list.map(todo => (
+    <CiscoItem
+      key={todo.id}
+      todo={todo}
+      isHidden={isHidden}
+      handleChangeEdit={handleChangeEdit}
+      handleEdit={handleEdit}
+      handleDelete={handleDelete}
+      handleComplete={handleComplete}
+      edit={isEdit === todo.id}
+    />
+  ));
 
   return <div>{renderCiscolist}</div>;
 }
