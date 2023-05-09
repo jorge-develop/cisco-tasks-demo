@@ -50,61 +50,56 @@ function Ciscolist({ todos, setTodos, setEditTitle, editTitle }) {
     setTodos(mapValue);
   };
 
-  const renderCiscolist = todos.map(todo =>
-    isEdit === todo.id ? (
-      <li
-        className={`list-item${isHidden === todo.id ? " hidden" : ""}`}
-        key={todo.id}
-      >
+  const renderCiscolist = todos.map(todo => {
+    const isBeingEdited = isEdit === todo.id;
+    const isHiddenClass = isHidden === todo.id ? "hidden" : "";
+
+    return (
+      <li className={`list-item ${isHiddenClass}`} key={todo.id}>
         <input
           type="text"
           value={todo.title}
-          className="list edit"
+          className={`list ${isBeingEdited ? "edit" : ""} ${
+            todo.completed ? "complete" : ""
+          }`}
           onChange={e => handleChangeEdit(e, todo)}
+          readOnly={!isBeingEdited}
         />
+
         <div>
-          <button
-            className="button-edit task-button"
-            onClick={() => handleEdit(null)}
-          >
-            <i className="fa fa-check-square-o"></i>
-          </button>
+          {isBeingEdited ? (
+            <button
+              className="button-edit task-button"
+              onClick={() => handleEdit(null)}
+            >
+              <i className="fa fa-check-square-o"></i>
+            </button>
+          ) : (
+            <>
+              <button
+                className="button-complete task-button"
+                onClick={() => handleComplete(todo.id)}
+              >
+                <i className="fa fa-check-circle"></i>
+              </button>
+              <button
+                className="button-edit task-button"
+                onClick={() => handleEdit(todo.id)}
+              >
+                <i className="fa fa-edit"></i>
+              </button>
+              <button
+                className="button-delete task-button"
+                onClick={() => handleDelete(todo.id, todo.title)}
+              >
+                <i className="fa fa-trash"></i>
+              </button>
+            </>
+          )}
         </div>
       </li>
-    ) : (
-      <li
-        className={`list-item${isHidden === todo.id ? " hidden" : ""}`}
-        key={todo.id}
-      >
-        <input
-          type="text"
-          value={todo.title}
-          className={`list ${todo.completed ? "complete" : null}`}
-          onChange={e => e.preventDefault()}
-        />
-        <div>
-          <button
-            className="button-complete task-button"
-            onClick={() => handleComplete(todo.id)}
-          >
-            <i className="fa fa-check-circle"></i>
-          </button>
-          <button
-            className="button-edit task-button"
-            onClick={() => handleEdit(todo.id)}
-          >
-            <i className="fa fa-edit"></i>
-          </button>
-          <button
-            className="button-delete task-button"
-            onClick={() => handleDelete(todo.id, todo.title)}
-          >
-            <i className="fa fa-trash"></i>
-          </button>
-        </div>
-      </li>
-    )
-  );
+    );
+  });
 
   return <div>{renderCiscolist}</div>;
 }
