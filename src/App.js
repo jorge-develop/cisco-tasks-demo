@@ -12,8 +12,7 @@ const App = () => {
   const [todos, setTodos] = useState(
     JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || []
   );
-  const [editTitle, setEditTitle] = useState(false);
-
+  const [isEdit, setIsEdit] = useState(null);
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
   }, [todos]);
@@ -21,23 +20,18 @@ const App = () => {
     <div className="container">
       <div className="app-wrapper">
         <div>
-          <Header todos={todos} editTitle={editTitle} />
+          <Header todos={todos} isEdit={Boolean(isEdit)} />
         </div>
         <div>
-          <Form
-            // input={input}
-            todos={todos}
-            // setInput={setInput}
-            setTodos={setTodos}
-          />
+          <Form todos={todos} setTodos={setTodos} />
         </div>
         <div>
           <ToastContainer />
           <Ciscolist
             todos={todos}
             setTodos={setTodos}
-            setEditTitle={setEditTitle}
-            editTitle={editTitle}
+            isEdit={isEdit}
+            setIsEdit={setIsEdit}
           />
         </div>
       </div>

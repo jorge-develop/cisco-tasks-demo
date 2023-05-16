@@ -6,9 +6,8 @@ const confirmStyleBox = {
   autoClose: 8000,
 };
 
-function Ciscolist({ todos, setTodos, setEditTitle }) {
+function Ciscolist({ todos, setTodos, setIsEdit, isEdit }) {
   const [isHidden, setIsHidden] = useState(null);
-  const [isEdit, setIsEdit] = useState(null);
 
   const handleDelete = (_id, _title) => {
     const confirmDelete = window.confirm(
@@ -40,7 +39,6 @@ function Ciscolist({ todos, setTodos, setEditTitle }) {
 
   const handleEdit = id => {
     setIsEdit(id);
-    setEditTitle(Boolean(id));
   };
 
   const handleChangeEdit = (e, ciscoObject) => {

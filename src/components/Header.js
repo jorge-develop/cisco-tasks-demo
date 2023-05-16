@@ -1,10 +1,10 @@
 import React from "react";
 
-function Header({ todos, editTitle }) {
+function Header({ todos, isEdit }) {
   return (
     <div className="header">
-      <h1 style={{ color: editTitle ? "red" : !todos.length ? "red" : null }}>
-        {editTitle
+      <h1 style={{ color: isEdit ? "red" : !todos.length ? "red" : null }}>
+        {isEdit
           ? " EDIT MODE"
           : `${!todos.length ? "NO TASKS!" : `CiscoTask-${todos.length}`}`}
       </h1>
