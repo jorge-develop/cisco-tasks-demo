@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 const confirmStyleBox = {
   position: toast.POSITION.TOP_CENTER,
   autoClose: 8000,
 };
 
-function Form({ input, todos, setInput, setTodos }) {
+function Form({ todos, setTodos }) {
+  const [input, setInput] = useState("");
   const handleChange = e => {
     setInput(e.target.value);
   };

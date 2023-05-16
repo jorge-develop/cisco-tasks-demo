@@ -9,7 +9,6 @@ import "./App.css";
 const LOCAL_STORAGE_KEY = "cisco-todos";
 
 const App = () => {
-  const [input, setInput] = useState("");
   const [todos, setTodos] = useState(
     JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || []
   );
@@ -26,9 +25,9 @@ const App = () => {
         </div>
         <div>
           <Form
-            input={input}
+            // input={input}
             todos={todos}
-            setInput={setInput}
+            // setInput={setInput}
             setTodos={setTodos}
           />
         </div>
