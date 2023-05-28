@@ -1,0 +1,91 @@
+/* styles.module.css */
+
+.button {
+  background-color: #04aa6d;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+
+  width: 100%;
+  opacity: 0.9;
+  background-color: orange;
+}
+
+.button:hover {
+  opacity: 1;
+}
+
+.cancelbtn,
+.deletebtn {
+  float: left;
+  width: 50%;
+}
+
+.cancelbtn {
+  background-color: #ccc;
+  color: black;
+  font-size: 20px;
+  padding: 20px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.deletebtn {
+  background-color: #f44336;
+  color: rgb(236, 231, 231);
+  font-size: 20px;
+  padding: 20px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.container {
+  padding: 16px;
+  text-align: center;
+}
+
+.modal {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  align-items: center;
+  justify-content: center;
+}
+.close {
+  position: relative;
+  top: -60px;
+  left: 26px;
+  font-size: 20px;
+  color: #fff;
+  cursor: pointer;
+}
+.modal-content {
+  background-color: #6c8b91;
+}
+
+.close:hover,
+.close:focus {
+  color: yellow;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+@media screen and (max-width: 800px) {
+  .cancelbtn,
+  .deletebtn {
+    width: 100%;
+  }
+  .close {
+    position: relative;
+    top: -100px;
+    left: 26px;
+  }
+}
